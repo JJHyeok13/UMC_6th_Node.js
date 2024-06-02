@@ -8,5 +8,5 @@ import {
 
 export const restaurantRouter = express.Router();
 
-restaurantRouter.get("/create", asyncHandler(restaurantCreate));
-restaurantRouter.post("/write", asyncHandler(reviewCreate));
+restaurantRouter.post("/create", asyncHandler(restaurantCreate));
+restaurantRouter.post("/review", asyncHandler(reviewCreate));

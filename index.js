@@ -20,7 +20,7 @@ app.use(express.json()); // Parse JSON request body
 app.use(express.urlencoded({ extended: false })); // Parse URL-encoded request body
 
 app.use("/member", userRouter); // Use userRouter for routes starting with /user
-app.use("/review", restaurantRouter);
+app.use("/restaurant", restaurantRouter);
 
 app.use("/api-docs", SwaggerUi.serve, SwaggerUi.setup(specs)); // Swagger setup for API documentation
 
