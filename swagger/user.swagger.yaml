@@ -10,10 +10,6 @@ paths:
           required: true
           schema:
             properties:
-              email:
-                type: string
-                description: 유저 이메일
-                example: jjinh99@naver.com
               name:
                 type: string
                 description: 유저 이름
@@ -22,18 +18,10 @@ paths:
                 type: string
                 description: 유저 성별
                 example: male
-              birthYear:
-                type: integer
-                description: 생일 년도
-                example: 1999
-              birthMonth:
-                type: integer
-                description: 생일 월
-                example: 2
-              birthDay:
-                type: integer
-                description: 생일 일
-                example: 13
+              birthday:
+                type: string
+                description: 생일
+                example: "1999-02-13"
               addr:
                 type: string
                 description: 주소
@@ -46,19 +34,25 @@ paths:
                 type: string
                 description: 전화 번호
                 example: 010-9062-7988
+              email:
+                type: string
+                description: 유저 이메일
+                example: jjinh99@naver.com
+              social_type:
+                type: string
+                description: 소셜 로그인 타입
+                example: kakao
               prefer:
                 type: array
                 description: 선호 카테고리 번호
                 example: [1, 3, 5]
+
       responses:
         "200":
           description: 회원 가입 성공!
           schema:
             type: object
             properties:
-              status:
-                type: integer
-                example: 200
               isSuccess:
                 type: boolean
                 example: true
@@ -68,7 +62,7 @@ paths:
               message:
                 type: string
                 example: "success!"
-              data:
+              result:
                 type: object
                 example:
                   {

@@ -6,33 +6,47 @@ import {
   getMember,
   getMemberPreferToMemberID,
   setMemberPrefer,
-} from "../models/member.dao";
+} from "../models/member/member.dao";
 
 export const joinMember = async (body) => {
+  const {
+    email,
+    name,
+    gender,
+    birthday,
+    addr,
+    specAddr,
+    phone,
+    social_type,
+    point,
+  } = body;
+
   const prefer = body.prefer;
 
   const joinMemberData = await addMember({
-    name: body.name,
-    gender: body.gender,
-    birthYear: body.birthYear,
-    birthMonth: body.birthMonth,
-    birthDay: body.birthDay,
-    addr: body.addr,
-    specAddr: body.specAddr,
-    phone: body.phone,
-    email: body.email,
-    social_type: body.social_type, // Assuming this field is included in the body
+    name: name,
+    gender: gender,
+    birthday: birthday,
+    addr: addr,
+    specAddr: specAddr,
+    phone: phone,
+    email: email,
+    social_type: social_type,
+    point: point,
+    prefer: prefer,
   });
 
-  if (joinMemberData == -1) {
+  let email_duplicate = -1;
+
+  if (joinMemberData == email_duplicate) {
     throw new BaseError(status.EMAIL_ALREADY_EXIST);
   } else {
     for (let i = 0; i < prefer.length; i++) {
       await setMemberPrefer(joinMemberData, prefer[i]);
     }
-    return signupResponseDTO(
-      await getMember(joinMemberData),
-      await getMemberPreferToMemberID(joinMemberData)
-    );
+    const memberData = await getMember(joinMemberData);
+    const preferData = await getMemberPreferToMemberID(joinMemberData);
+
+    return signupResponseDTO(memberData, preferData);
   }
 };

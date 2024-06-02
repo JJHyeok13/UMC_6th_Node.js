@@ -19,6 +19,20 @@ export const status = {
     code: "COMMON000",
     message: "서버 에러, 관리자에게 문의 바랍니다.",
   },
+
+  PARAMETER_IS_WRONG: {
+    status: StatusCodes.BAD_REQUEST,
+    isSuccess: false,
+    code: "DB001",
+    message: "잘못된 파라미터입니다.",
+  },
+  EMAIL_ALREADY_EXIST: {
+    status: StatusCodes.BAD_REQUEST,
+    usSuccess: false,
+    code: "DB002",
+    message: "중복된 이메일이 있습니다.",
+  },
+
   BAD_REQUEST: {
     status: StatusCodes.BAD_REQUEST,
     isSuccess: false,
