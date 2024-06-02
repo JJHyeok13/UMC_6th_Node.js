@@ -6,6 +6,7 @@ import { specs } from "./config/swagger.config.js";
 import SwaggerUi from "swagger-ui-express";
 import { response } from "./config/response.js";
 import { status } from "./config/response.status.js";
+import { restaurantRouter } from "./src/routers/restaurant.route.js";
 
 dotenv.config(); // Use .env file for environment variables
 
@@ -19,6 +20,7 @@ app.use(express.json()); // Parse JSON request body
 app.use(express.urlencoded({ extended: false })); // Parse URL-encoded request body
 
 app.use("/member", userRouter); // Use userRouter for routes starting with /user
+app.use("/review", restaurantRouter);
 
 app.use("/api-docs", SwaggerUi.serve, SwaggerUi.setup(specs)); // Swagger setup for API documentation
 

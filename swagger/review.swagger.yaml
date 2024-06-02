@@ -1,0 +1,83 @@
+paths:
+  /review/write:
+    post:
+      tags:
+        - Review
+      summary: 리뷰 작성
+      parameters:
+        - name: write
+          in: body
+          required: true
+          schema:
+            properties:
+              member_id:
+                type: integer
+                description: 회원 ID
+                example: 1
+              restaurant_id:
+                type: integer
+                description: 레스토랑 ID
+                example: 1
+              content:
+                type: string
+                description: 리뷰 내용
+                example: "훌륭한 음식과 서비스였습니다!"
+              rating:
+                type: double
+                description: 평점
+                example: 5.0
+
+      responses:
+        "201":
+          description: 리뷰 작성 성공!
+          schema:
+            type: object
+            properties:
+              isSuccess:
+                type: boolean
+                example: true
+              code:
+                type: integer
+                example: 2010
+              message:
+                type: string
+                example: "Review created successfully!"
+              result:
+                type: object
+                example: { "reviewId": "1" }
+
+        "400":
+          description: 잘못된 요청
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 400
+              isSuccess:
+                type: boolean
+                example: false
+              code:
+                type: integer
+                example: COMMON001
+              message:
+                type: string
+                example: 잘못된 요청입니다
+
+        "500":
+          description: 서버 에러
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 500
+              isSuccess:
+                type: boolean
+                example: false
+              code:
+                type: integer
+                example: COMMON000
+              message:
+                type: string
+                example: 서버 에러, 관리자에게 문의 바랍니다.
