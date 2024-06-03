@@ -1,28 +1,24 @@
 CREATE TABLE Member (
-  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(20) NOT NULL,
-  gender VARCHAR(10) NOT NULL,
-  birthday DATE NOT NULL,
-  address VARCHAR(255) NOT NULL,
-  email VARCHAR(50) NOT NULL,
-  social_type VARCHAR(10) NOT NULL,
-  point INT NOT NULL DEFAULT 0,
-  created_at DATETIME(6) NOT NULL,
-  updated_at DATETIME(6) NOT NULL
+    id          BIGINT NOT NULL AUTO_INCREMENT primary key,
+    name        varchar(20)   not null,
+    gender      varchar(10)   not null,
+    birthday    varchar(255)  not null,
+    addr        varchar(255)  not null,
+    specAddr    varchar(255)  not null,
+    phone       varchar(255)  not null,
+    email       varchar(50)   not null,
+    social_type varchar(10)   not null,
+    point       int default 0 not null
 );
 
-CREATE TABLE FoodType (
-  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(20) NOT NULL,
-  created_at DATETIME(6) NOT NULL,
-  updated_at DATETIME(6) NOT NULL
+create table FoodType (
+    id   BIGINT NOT NULL AUTO_INCREMENT primary key,
+    name varchar(20) not null
 );
 
 CREATE TABLE Region (
   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(20) NOT NULL,
-  created_at DATETIME(6) NOT NULL,
-  updated_at DATETIME(6) NOT NULL
 );
 
 CREATE TABLE Restaurant (
@@ -31,8 +27,6 @@ CREATE TABLE Restaurant (
   region_id BIGINT NOT NULL,
   name VARCHAR(50) NOT NULL,
   address VARCHAR(255) NOT NULL,
-  created_at DATETIME(6) NOT NULL,
-  updated_at DATETIME(6) NOT NULL,
   FOREIGN KEY (foodtype_id) REFERENCES FoodType(id),
   FOREIGN KEY (region_id) REFERENCES Region(id)
 );
@@ -42,19 +36,9 @@ CREATE TABLE Review (
   member_id BIGINT NOT NULL,
   restaurant_id BIGINT NOT NULL,
   content VARCHAR(255) NOT NULL,
-  created_at DATETIME(6) NOT NULL,
-  updated_at DATETIME(6) NOT NULL,
+  rating DOUBLE NOT NULL,
   FOREIGN KEY (member_id) REFERENCES Member(id),
   FOREIGN KEY (restaurant_id) REFERENCES Restaurant(id)
-);
-
-CREATE TABLE ReviewImage (
-  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  review_id BIGINT NOT NULL,
-  image_url VARCHAR(255) NOT NULL,
-  created_at DATETIME(6) NOT NULL,
-  updated_at DATETIME(6) NOT NULL,
-  FOREIGN KEY (review_id) REFERENCES Review(id)
 );
 
 CREATE TABLE Mission (
@@ -63,8 +47,6 @@ CREATE TABLE Mission (
   region_id BIGINT NOT NULL,
   point INT NOT NULL,
   deadline DATETIME,
-  created_at DATETIME(6) NOT NULL,
-  updated_at DATETIME(6) NOT NULL,
   FOREIGN KEY (restaurant_id) REFERENCES Restaurant(id),
   FOREIGN KEY (region_id) REFERENCES Region(id)
 );
@@ -74,8 +56,6 @@ CREATE TABLE MemberMission (
   member_id BIGINT NOT NULL,
   mission_id BIGINT NOT NULL,
   restaurant_id BIGINT NOT NULL,
-  created_at DATETIME(6) NOT NULL,
-  updated_at DATETIME(6) NOT NULL,
   FOREIGN KEY (member_id) REFERENCES Member(id),
   FOREIGN KEY (mission_id) REFERENCES Mission(id),
   FOREIGN KEY (restaurant_id) REFERENCES Restaurant(id)
