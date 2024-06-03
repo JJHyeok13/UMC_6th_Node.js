@@ -7,11 +7,22 @@ import {
   insertRestaurant,
   getReviewById,
   insertReview,
+  confirmRestaurant,
 } from "./restaurant.sql";
 
 export const addRestaurant = async (data) => {
   try {
     const conn = await pool.getConnection();
+    const [confirm] = await conn.query(confirmRestaurant, [
+      data.name,
+      data.address,
+    ]);
+
+    if (confirm[0].isExistRestaurant) {
+      conn.release();
+      return -1;
+    }
+
     const result = await pool.query(insertRestaurant, [
       data.name,
       data.address,

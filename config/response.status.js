@@ -26,11 +26,19 @@ export const status = {
     code: "DB001",
     message: "잘못된 파라미터입니다.",
   },
+
   EMAIL_ALREADY_EXIST: {
     status: StatusCodes.BAD_REQUEST,
-    usSuccess: false,
+    isSuccess: false,
     code: "DB002",
     message: "중복된 이메일이 있습니다.",
+  },
+
+  RESTAURANT_ALREADY_EXIST: {
+    status: StatusCodes.BAD_REQUEST,
+    isSuccess: false,
+    code: "DB100",
+    message: "중복된 가게가 존재합니다.",
   },
 
   BAD_REQUEST: {

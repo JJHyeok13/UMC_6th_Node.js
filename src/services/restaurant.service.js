@@ -21,8 +21,10 @@ export const createRestaurant = async (body) => {
     foodtype_id: foodtype_id,
   });
 
-  if (createRestaurantData == -1) {
-    throw new BaseError(status.PARAMETER_IS_WRONG);
+  let restaurant_duplicate = -1;
+
+  if (createRestaurantData == restaurant_duplicate) {
+    throw new BaseError(status.RESTAURANT_ALREADY_EXIST);
   } else {
     return createRestaurantResponseDTO(
       await getRestaurant(createRestaurantData)
